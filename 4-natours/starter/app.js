@@ -2,6 +2,7 @@ const fs = require('fs');
 
 const express = require('express');
 const morgan = require('morgan');
+const { create } = require('domain');
 
 const app = express();
 
@@ -87,12 +88,50 @@ const deleteTour = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is no defined!',
+  });
+};
+const getUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is no defined!',
+  });
+};
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is no defined!',
+  });
+};
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is no defined!',
+  });
+};
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is no defined!',
+  });
+};
+
 app.route('/api/v1/tours').get(getAllTours).post(createTour);
 app
   .route('/api/v1/tours/:id')
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+app
+  .route('/api/v1/users/:id')
+  .get(getUsers)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 const port = 3000;
 

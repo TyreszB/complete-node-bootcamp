@@ -19,6 +19,24 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('-createdAt');
     }
 
+    if (req.query.filter) {
+      const feilds = req.query.sort.split(',').join(' ');
+      query = query.select(feilds);
+    } else {
+      query = query.select('-__v');
+    }
+
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit || 1;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numTours = await Tour.countDocuments();
+      if (numTours <= skip) throw new Error('This page does not exitst');
+    }
+
     const tours = await query;
 
     res.status(200).json({

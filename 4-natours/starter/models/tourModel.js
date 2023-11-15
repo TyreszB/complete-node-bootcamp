@@ -20,7 +20,7 @@ const tourSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A tour must have a duration '],
   },
-  ratingQuatity: {
+  ratingsQuantity: {
     type: Number,
     default: 0,
   },

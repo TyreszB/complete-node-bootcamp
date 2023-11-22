@@ -61,7 +61,14 @@ const tourSchema = new mongoose.Schema(
   },
 );
 
-//added comment
+tourSchema.pre(/^find/, function (next) {
+  this.find({ secretTour: { $ne: true } });
+  next();
+});
+tourSchema.post(/^find/, (docs, next) => {
+  console.log(docs);
+  next();
+});
 
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
